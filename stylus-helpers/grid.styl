@@ -1,0 +1,50 @@
+.container
+    flex 1 1 auto
+    margin auto
+    width 100%
+
+    for $size, $width in $container-widths
+        @media only screen and (min-width: $width)
+            max-width: ($width * 0.9375)
+
+    &.fluid
+        max-width 100%
+
+.row
+    display flex
+    flex 1 1 auto
+    flex-wrap nowrap
+    min-width 0
+
+    &.wrap
+        flex-wrap wrap
+
+    &.row
+        flex-direction: row
+        &.reverse
+            flex-direction: row-reverse
+
+    &.column
+        flex-direction: column
+        &.reverse
+            flex-direction: column-reverse
+
+.cell
+    flex 1 1 auto
+    max-width 100%
+
+for $size, $width in $breakpoints
+    @media all and (min-width: $width)
+        for n in (1..$grid-cols)
+            .cell.{$size}{n}
+                flex-basis: (n / $grid-cols * 100)%
+                flex-grow: 0
+                max-width: (n / $grid-cols * 100)%
+
+            .cell.order-{$size}{n}
+                order: n
+
+        for n in (0..$grid-cols)
+            .cell.offset-{$size}{n}
+                // Offsets can only ever work in row layouts
+                margin-left: (n / $grid-cols * 100)%

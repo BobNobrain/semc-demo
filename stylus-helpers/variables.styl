@@ -1,0 +1,89 @@
+// colors
+$default-colors = {
+    primary:        #2375d4,
+    secondary:      #081564,
+
+    error:          #f44110,
+    warning:        #dea627,
+    info:           #3aa3fe,
+    success:        #49b72c,
+
+    white:          #ffffff,
+    grey-white:     #e7e7e7,
+    grey-lightest:  #c9c9c9,
+    grey-lighter:   #b7b7b7,
+    grey-light:     #a5a5a5,
+    grey:           #919191,
+    grey-dark:      #656565,
+    grey-darker:    #434343,
+    grey-darkest:   #2a2a2a,
+    grey-black:     #151515,
+    black:          #000000
+}
+$colors = merge($default-colors, $colors)
+
+// shadows
+$box-shadows = none
+for $e in 1 2 4 6 8
+    $around = 0 $e * 1px $e * 2px #0003,
+    $bottom = 0 0 $e * 2px #0001
+    push($box-shadows, '%s, %s' % ($around $bottom))
+
+// sizes
+$default-font-sizes ?= {
+    small: 12px,
+    little: 14px,
+    regular: 16px,
+    large: 18px,
+    title: 24px,
+    banner: 32px,
+    headline: 48px
+}
+$font-sizes = merge($default-font-sizes, $font-sizes)
+
+// grid
+$grid-cols ?= 12
+
+$default-breakpoints = {
+    xs: 0,
+    sm: 600px,
+    md: 960px,
+    lg: (1280px - 16px),
+    xl: (1920px - 16px)
+}
+$breakpoints = merge($default-breakpoints, $breakpoints)
+
+$media-queries := {
+    xs-only: "only screen and (max-width: %s)" % ($breakpoints.sm - 1)
+    sm-only: "only screen and (min-width: %s) and (max-width: %s)" % ($breakpoints.sm ($breakpoints.md  - 1))
+    sm-and-down: "only screen and (max-width: %s)" % ($breakpoints.md - 1)
+    sm-and-up: "only screen and (min-width: %s)" % $breakpoints.sm
+    md-only: "only screen and (min-width: %s) and (max-width: %s)" % ($breakpoints.md ($breakpoints.lg  - 1))
+    md-and-down: "only screen and (max-width: %s )" % ($breakpoints.lg - 1)
+    md-and-up: "only screen and (min-width: %s)" % $breakpoints.md
+    lg-only: "only screen and (min-width: %s) and (max-width: %s)" % ($breakpoints.lg ($breakpoints.xl - 1))
+    lg-and-down: "only screen and (max-width: (%s - 1))" % $breakpoints.xl
+    lg-and-up: "only screen and (min-width: %s)" % $breakpoints.lg
+    xl-only: "only screen and (min-width: %s)" % $breakpoints.xl
+}
+
+$default-container-widths = {
+    md: $breakpoints.md,
+    lg: $breakpoints.lg
+}
+$container-widths = merge($default-container-widths, $container-widths)
+
+// durations
+$default-durations = {
+    flash: 50ms,
+    very-fast: 100ms,
+    fast: 200ms,
+    regular: 300ms,
+    slow: 400ms,
+    very-slow: 500ms,
+
+    boring: 1s,
+    very-boring: 2s,
+    eternal: 10s
+}
+$durations = merge($default-durations, $durations)

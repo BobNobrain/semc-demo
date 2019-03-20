@@ -1,0 +1,23 @@
+// text alignment
+ for $size, $width in $breakpoints
+    @media all and (min-width: $width)
+        .text-{$size}-left
+            text-align: left
+
+        .text-{$size}-center
+            text-align: center
+
+        .text-{$size}-right
+            text-align: right
+
+        .text-{$size}-justify
+            text-align: justify
+
+.text-truncate
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+for $name, $size in $font-sizes
+    .size-{$name}
+        font-size $size !important
